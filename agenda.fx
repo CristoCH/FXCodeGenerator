@@ -11,4 +11,7 @@
         <property name="edad" readOnly="true" type="INTEGER"/>
         <property generic="Telefono" name="telefonos" readOnly="false" type="LIST"/>
     </bean>
+    <bean name="Alumno" parent="Persona">
+        <property name="cial" readOnly="false" type="STRING"/>
+    </bean>
 </fxModel>

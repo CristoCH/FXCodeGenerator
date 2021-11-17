@@ -16,20 +16,19 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
-<GridPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.MainView">
+<GridPane fx:id="view" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <columnConstraints>
+      <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+   </columnConstraints>
    <rowConstraints>
       <RowConstraints minHeight="10.0" />
       <RowConstraints minHeight="10.0" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
    </rowConstraints>
-   <columnConstraints>
-      <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-   </columnConstraints>
    <children>
       <ToolBar>
         <items>
-          <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="Nuevo">
+          <Button fx:id="nuevoButton" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#onNuevoAction" text="Nuevo">
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -38,7 +37,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Abrir">
+            <Button fx:id="abrirButton" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#onAbrirAction" text="Abrir">
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -47,7 +46,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button contentDisplay="GRAPHIC_ONLY" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" text="Guardar">
+            <Button fx:id="guardarButton" contentDisplay="GRAPHIC_ONLY" layoutX="64.0" layoutY="10.0" mnemonicParsing="false" onAction="#onGuardarAction" text="Guardar">
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -56,7 +55,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button contentDisplay="GRAPHIC_ONLY" layoutX="114.0" layoutY="10.0" mnemonicParsing="false" text="Generar">
+            <Button fx:id="generarButton" contentDisplay="GRAPHIC_ONLY" layoutX="118.0" layoutY="10.0" mnemonicParsing="false" onAction="#onGenerarAction" text="Generar">
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -70,20 +69,23 @@
       <HBox alignment="CENTER_LEFT" spacing="5.0" GridPane.rowIndex="1">
          <children>
             <Label text="Paquete:" />
-            <TextField prefColumnCount="20" />
+            <TextField fx:id="paqueteText" prefColumnCount="15" />
          </children>
-         <GridPane.margin>
+         <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </GridPane.margin>
+         </padding>
       </HBox>
       <SplitPane dividerPositions="0.3" prefHeight="160.0" prefWidth="200.0" GridPane.rowIndex="2">
          <items>
             <BorderPane>
+               <center>
+                  <ListView fx:id="beansList" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+               </center>
                <top>
-                  <HBox alignment="BOTTOM_CENTER" spacing="5.0" BorderPane.alignment="TOP_LEFT">
+                  <HBox alignment="BOTTOM_CENTER" spacing="5.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Label maxWidth="1.7976931348623157E308" text="Beans:" HBox.hgrow="ALWAYS" />
-                        <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="Añadir Bean">
+                        <Label maxWidth="1.7976931348623157E308" minWidth="-Infinity" text="Beans:" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="nuevoBeanButton" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#onNuevoBeanAction" text="Añadir bean">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -92,7 +94,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button contentDisplay="GRAPHIC_ONLY" layoutX="43.0" layoutY="15.0" mnemonicParsing="false" text="Eliminar Bean">
+                        <Button fx:id="eliminarBeanButton" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#onEliminarBeanAction" text="Eliminar bean">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -107,23 +109,20 @@
                      </padding>
                   </HBox>
                </top>
-               <center>
-                  <ListView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-               </center>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </BorderPane>
-            <BorderPane layoutX="10.0" layoutY="10.0">
+            <BorderPane fx:id="rightPane" layoutX="10.0" layoutY="10.0">
                <center>
-                  <VBox alignment="CENTER" spacing="5.0" BorderPane.alignment="CENTER">
+                  <VBox fx:id="noBeanPane" alignment="CENTER" spacing="5.0" BorderPane.alignment="CENTER">
                      <children>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/noselected-64x64.png" />
                            </image>
                         </ImageView>
-                        <Label text="No hay ningún bean seleccionado" />
+                        <Label text="No hay ningún bean seleccionado." />
                      </children>
                   </VBox>
                </center>
